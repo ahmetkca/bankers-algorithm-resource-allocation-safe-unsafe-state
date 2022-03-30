@@ -53,10 +53,21 @@ int **calculate_need() {
     return need;
 }
 
-int is_safe() {
+bool is_safe() {
     int work[number_of_resource];
+    for (int i = 0; i < number_of_resource; i++) {
+        work[i] = available[i];
+    }
     int finish[number_of_process];
     for (int i = 0; i < number_of_process; i++) {
         finish[i] = false;
     }
+
+    
+    
+    for (int i = 0; i < number_of_process; i++) {
+        if (finish[i] == false)
+            return false;
+    }
+    return true;
 }

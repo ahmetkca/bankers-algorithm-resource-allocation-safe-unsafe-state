@@ -23,6 +23,6 @@ int cmp_vector(int size1, const int *vec1,int size2, const int * vec2);
 
 int **calculate_need();
 
-int is_safe();
+bool is_safe();
 
 #endif
