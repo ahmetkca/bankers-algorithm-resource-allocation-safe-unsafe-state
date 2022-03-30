@@ -65,5 +65,8 @@ int main(int argc, char **argv)
         }
         printf("\n");
     }
+    
+    calculate_need();
+    printf("Is system in safe state? %d\n", is_safe());
     return 0;
 }

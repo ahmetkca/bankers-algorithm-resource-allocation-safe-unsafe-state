@@ -44,6 +44,20 @@ bool cmp_vectors(int size1, const int *vec1,int size2, const int * vec2) {
     return lt_or_eq;
 }
 
+int *add_vectors(const int size1, int *vec1, const int size2, const int *vec2) {
+    int min;
+    if (size1 > size2)
+        min = size2;
+    else
+        min = size1;
+
+    for (int i = 0; i < min; i++) {
+        *(vec1 + i) = *(vec1 + i) + *(vec2 + i);
+    }
+
+    return vec1;
+}
+
 int **calculate_need() {
     for(int p = 0 ;p < number_of_process; p++) {
         for(int r = 0; r < number_of_resource; r++) {
@@ -62,8 +76,17 @@ bool is_safe() {
     for (int i = 0; i < number_of_process; i++) {
         finish[i] = false;
     }
-
     
+    int reloop = 1;
+    for (int finish_i = 0; finish_i < reloop; finish_i++) {
+        for (int i = 0; i < number_of_process; i++) {
+            if (finish[i] == false && cmp_vectors(number_of_resource, &need[i][0], number_of_resource, &work[0]) == true) {
+                add_vectors(number_of_resource, &work[0], number_of_resource, &allocation[i][0]);
+                finish[i] = true;
+                reloop++;
+            }
+        }
+    }
     
     for (int i = 0; i < number_of_process; i++) {
         if (finish[i] == false)
